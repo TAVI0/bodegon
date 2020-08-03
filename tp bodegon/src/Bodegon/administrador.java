@@ -45,7 +45,7 @@ public class administrador extends persona{
         int mayorBebidaVenta=0;
         for (consumible beb : mn.getMenu()) {
             if(beb.getTipo().equals("bebida")){
-                if(beb.getCont()>mayorVenta){
+                if(beb.getCont()>mayorBebidaVenta){
                     be =(bebida) beb;
                     mayorBebidaVenta = beb.getCont();
                 }
@@ -81,8 +81,12 @@ public class administrador extends persona{
         }
     
     void darPrecio(menuFinal mn){
-        int opc=entradaSalida.leerInt(mn.listaMenuAdmin()+"\nSelecciona receta");
-        mn.getMenu().get(opc).setPrecio(entradaSalida.leerInt(mn.listaMenuAdmin()+"\nReceta "+opc+" precio:"));
+        if(!mn.getMenu().isEmpty()){
+            int opc=entradaSalida.leerInt(mn.listaMenuAdmin()+"\nSelecciona receta");
+            mn.getMenu().get(opc).setPrecio(entradaSalida.leerInt(mn.listaMenuAdmin()+"\nReceta "+opc+" precio:"));
+        }else{
+            entradaSalida.mostrarString("El menu esta vacio");
+        }
     }
     
     void altaEmpleado(stockPersonas empl){
